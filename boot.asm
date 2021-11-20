@@ -5,31 +5,16 @@ int 0x10 ;将显示模式设置成文本模式（清频）
 
 xchg bx, bx
 
-mov ax, 0xb800
-mov es, ax
+mov ax, 5
+mov bx, 6
+mov bx, ax
 
-mov ax, 0
-mov ds, ax
+mov ax, 0xefff
+mov bx, 3
+mul bx
 
-mov si, message
-mov di, 0
-mov cx, (message_end - message)
-
-loop1:
-	mov al, [ds:si]
-	mov [es:di], al
-	
-	inc si
-	add di, 2
-	
-	loop loop1
-	
 halt:
 	jmp halt
-
-message:
-	db "hello world!!!", 0
-message_end:
 	
 times 510 - ($ - $$) db 0
 db 0x55, 0xaa
