@@ -31,7 +31,19 @@ loopa:
 	jmp loopa
 	
 clock:
-	xchg bx, bx
+	;xchg bx, bx
+	push bx
+	push bx
+	
+	mov bx, 4
+	mov al, 'C'
+	call blink
+	
+	mov al, 0x20
+	out PIC_M_CMD, al
+	
+	pop ax
+	pop bx
 	iret
 
 blink:
